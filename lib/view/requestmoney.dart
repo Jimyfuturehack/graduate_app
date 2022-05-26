@@ -4,18 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class Sendmoney extends StatefulWidget {
-  const Sendmoney({Key? key}) : super(key: key);
+class Requestmoney extends StatefulWidget {
+  const Requestmoney({Key? key}) : super(key: key);
 
   @override
-  State<Sendmoney> createState() => _SendmoneyState();
+  State<Requestmoney> createState() => _RequestmoneyState();
 }
 
-class _SendmoneyState extends State<Sendmoney> {
+class _RequestmoneyState extends State<Requestmoney> {
+
   List<Contact> contacts=[];
   List<Contact> filtercontacts=[];
   var height;
+  late bool permission;
   TextEditingController myname = TextEditingController();
   @override
   void initState(){
@@ -48,6 +49,8 @@ class _SendmoneyState extends State<Sendmoney> {
     });
   }
 
+
+
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height-277;
     bool isSearch= myname.text.isNotEmpty;
@@ -75,19 +78,19 @@ class _SendmoneyState extends State<Sendmoney> {
                   SizedBox(height: 5,),
                   Container(
                     decoration: BoxDecoration(
-                      border:  Border(bottom: BorderSide(color:Colors.black26))
+                        border:  Border(bottom: BorderSide(color:Colors.black26))
                     ),
                     child: Row(
                       children:<Widget> [
                         SizedBox(width: 25,),
-                        Text("To",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                        Text("From",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
                         SizedBox(width: 15,),
                         Container(
-                            width: MediaQuery.of(context).size.width / 2,
+                          width: MediaQuery.of(context).size.width / 2,
                           height: 50,
                           child: TextFormField(
-                          //  autofocus: true,
-                           controller: myname,
+                         //   autofocus:true,
+                            controller: myname,
                             cursorHeight: 25,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
@@ -147,6 +150,7 @@ class _SendmoneyState extends State<Sendmoney> {
                         itemBuilder: ( context,index){
                           var contact = isSearch==true? filtercontacts![index]: contacts![index];
                           Uint8List? image= contact.photo;
+
                           String number=(contact.phones.isNotEmpty)? contact.phones.first.number: " ";
                           return Card(
                             child: ListTile(
@@ -177,6 +181,3 @@ class _SendmoneyState extends State<Sendmoney> {
     );
   }
 }
-
-
-

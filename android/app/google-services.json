@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "22375860646",
+    "project_id": "easymoney-8fe77",
+    "storage_bucket": "easymoney-8fe77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22375860646:android:5b3d657ed20684faa12767",
+        "android_client_info": {
+          "package_name": "com.example.unititled5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22375860646-fq1e851ss987kfv0a382ppptdv9o90j8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFxzY0v_BBGdWsRq5_k33bZTInDsXVpGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22375860646-fq1e851ss987kfv0a382ppptdv9o90j8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22375860646-tqqdkgnan2jjcgvjc45mspfbm4oa4i0n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "AhmedShawky.EasyMoney"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

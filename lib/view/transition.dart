@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:untitled5/view/sendmoney.dart';
+import 'package:untitled5/view/requestmoney.dart';
+
 class Transition extends StatefulWidget {
   const Transition({Key? key}) : super(key: key);
 
@@ -422,7 +424,19 @@ class _TransitionState extends State<Transition> {
             borderRadius: BorderRadius.circular(30)
           ),
           child: FlatButton(
-            onPressed: (){},
+            onPressed: (){
+              if (text.isEmpty||(text.startsWith("0.")&& text.length==2)||(text.startsWith("0")&& text.length==1)){
+                return null;
+              }else{
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder:(context){
+                      return Requestmoney();
+                    })
+                );
+              }
+
+            },
             child: Text("Request",style: TextStyle(color: Colors.white,fontSize: 18,letterSpacing: 1,fontWeight: FontWeight.bold),),
           ),
         ),

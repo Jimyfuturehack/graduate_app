@@ -49,9 +49,11 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   numeric_keyboard: ^1.1.0
   contacts_service: ^0.6.0
-  flutter_contacts: ^1.1.4
   url_launcher: ^6.1.2
   flutter_initicon: ^1.0.3
+  flutter_contacts: ^1.1.4
+
+
 
 dependency_overrides:
   firebase_messaging_platform_interface: 3.2.1
