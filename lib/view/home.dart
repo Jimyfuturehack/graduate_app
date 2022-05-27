@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled5/view/signin.dart';
 import 'data_transections.dart';
+import 'package:untitled5/view/profile/main_page.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          new IconButton(onPressed: ()async{
+        /**  new IconButton(onPressed: ()async{
             await FirebaseAuth.instance.signOut();
             Navigator.pushReplacement(
                 context,
@@ -54,13 +55,26 @@ class _HomeState extends State<Home> {
                 })
             );
 
-          }, icon: Icon(Icons.logout,color: Colors.black,))
+          }, icon: Icon(Icons.logout,color: Colors.black,))**/
+          IconButton(onPressed: (){
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder:(context){
+                  return profile();
+                })
+            );
+
+          }, icon: Icon(Icons.person,color: Colors.black,))
         ],
         automaticallyImplyLeading: false,
-        centerTitle: true,
+
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Text("Home", style: TextStyle(color: Colors.black87)),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Text("Home", style: TextStyle(color: Colors.black87)),
+        ),
         titleSpacing: 1,
         titleTextStyle: TextStyle(
             letterSpacing: 1,

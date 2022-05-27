@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled5/view/home.dart';
 import 'package:untitled5/view/setting.dart';
@@ -10,7 +9,7 @@ class app extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 class _HomeState extends State<app> {
-  int _currentIndex = 0;
+  int currentIndex = 0;
   final taps = [
     Home(),
     Transition(),
@@ -19,9 +18,9 @@ class _HomeState extends State<app> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: taps[_currentIndex],
+      body: taps[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
@@ -43,7 +42,7 @@ class _HomeState extends State<app> {
         ],
         onTap: (index) {
           setState(() {
-            _currentIndex = index;
+            currentIndex = index;
           });
         },
       ),

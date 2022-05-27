@@ -16,7 +16,7 @@ class _RequestmoneyState extends State<Requestmoney> {
   List<Contact> contacts=[];
   List<Contact> filtercontacts=[];
   var height;
-  late bool permission;
+   late bool permission=false;
   TextEditingController myname = TextEditingController();
   @override
   void initState(){
@@ -29,6 +29,7 @@ class _RequestmoneyState extends State<Requestmoney> {
   getAllContacts() async{
     if(await FlutterContacts.requestPermission()){
       contacts =( await FlutterContacts.getContacts(withPhoto: true,withProperties: true));
+      permission==true;
       setState(() {
       });
     }
@@ -89,7 +90,7 @@ class _RequestmoneyState extends State<Requestmoney> {
                           width: MediaQuery.of(context).size.width / 2,
                           height: 50,
                           child: TextFormField(
-                         //   autofocus:true,
+                            autofocus:permission,
                             controller: myname,
                             cursorHeight: 25,
                             style: TextStyle(color: Colors.black),

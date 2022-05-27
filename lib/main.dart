@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled5/view/onBording.dart';
 import 'package:untitled5/view/signin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
-
 main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

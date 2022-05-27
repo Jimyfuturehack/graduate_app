@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled5/view/profile.dart';
 import 'package:untitled5/view/qr_scanner.dart';
 import 'contact_us.dart';
 class Setting extends StatefulWidget {
