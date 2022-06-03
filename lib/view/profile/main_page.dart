@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:untitled5/view/profile/setting.dart';
+
 class profile extends StatelessWidget {
   const profile({Key? key}) : super(key: key);
 
@@ -75,6 +78,10 @@ class profile extends StatelessWidget {
             ),
             SizedBox(height: 15,),
             ListTile(
+              onTap: (){
+                Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: setting()));
+
+              },
               title: Text("Settings",style: TextStyle(fontSize: 17),),
               subtitle: Text("Personal information, app & Security"),
               leading: CircleAvatar(child: Icon(Icons.settings,color:Colors.black),backgroundColor: Colors.white,),
@@ -82,6 +89,8 @@ class profile extends StatelessWidget {
             ),
             SizedBox(height: 15,),
             ListTile(
+              onTap: (){
+              },
               title: Text("Help",style: TextStyle(fontSize: 17),),
               subtitle: Text("Get support and feedback"),
               leading: CircleAvatar(child: Icon(Icons.message,color:Colors.black),backgroundColor: Colors.white,),

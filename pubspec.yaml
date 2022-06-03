@@ -52,6 +52,8 @@ dependencies:
   url_launcher: ^6.1.2
   flutter_initicon: ^1.0.3
   flutter_contacts: ^1.1.4
+  page_transition: ^2.0.5
+
 
 
 

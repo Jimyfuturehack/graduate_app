@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:untitled5/view/profile/main_page.dart';
 import 'package:untitled5/view/sendmoney.dart';
 import 'package:untitled5/view/requestmoney.dart';
 
@@ -48,22 +50,31 @@ class _TransitionState extends State<Transition> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(onPressed: (){
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder:(context){
+                  return profile();
+                })
+            );
+
+          }, icon: Icon(Icons.person,))
+        ],
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: Center(
           child: Container(
-            color: Colors.white,
+            color: Colors.blueAccent,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:<Widget>[
-                SizedBox(height: 30,),
-                Transform.translate(
-                  offset: Offset(10,0),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text("Transaction",
-                    style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold,letterSpacing: 1),),
-                  ),
-                ),
+
                 Transform.translate(
                   offset: Offset(0,70),
                   child: Column(
@@ -428,12 +439,8 @@ class _TransitionState extends State<Transition> {
               if (text.isEmpty||(text.startsWith("0.")&& text.length==2)||(text.startsWith("0")&& text.length==1)){
                 return null;
               }else{
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:(context){
-                      return Requestmoney();
-                    })
-                );
+                Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: Requestmoney()));
+
               }
 
             },
@@ -452,12 +459,8 @@ class _TransitionState extends State<Transition> {
               if (text.isEmpty||(text.startsWith("0.")&& text.length==2)||(text.startsWith("0")&& text.length==1)){
                 return null;
               }else{
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:(context){
-                      return Sendmoney();
-                    })
-                );
+                Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: Sendmoney()));
+
               }
 
             },
