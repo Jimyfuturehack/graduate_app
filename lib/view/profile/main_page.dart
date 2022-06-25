@@ -47,7 +47,7 @@ class profile extends StatelessWidget {
                         children: <Widget>[
                           Icon(Icons.add, color: Colors.pink),
                           SizedBox(width: 10,),
-                          Text('Invite your friends to join Telda', style: TextStyle(color: Colors.pink,fontSize: 17))
+                          Text('Invite your friends to join EasyMoney', style: TextStyle(color: Colors.pink,fontSize: 17))
                         ]
                     ),
                     onPressed: () {}

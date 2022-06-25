@@ -25,7 +25,7 @@ class _TransitionState extends State<Transition> {
       if(text.isEmpty){
         color="B9B7B7";
       }else{
-        color="000000";
+        color="ffffff";
       }
     });
   }
@@ -48,7 +48,7 @@ class _TransitionState extends State<Transition> {
     super.dispose();
   }
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height;
+    height = MediaQuery.of(context).size.height-270;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -63,7 +63,7 @@ class _TransitionState extends State<Transition> {
                 })
             );
 
-          }, icon: Icon(Icons.person,))
+          }, icon: Icon(Icons.person,color: Colors.white,))
         ],
         automaticallyImplyLeading: false,
       ),
@@ -74,9 +74,8 @@ class _TransitionState extends State<Transition> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:<Widget>[
-
                 Transform.translate(
-                  offset: Offset(0,70),
+                  offset: Offset(0,50),
                   child: Column(
                     children:<Widget> [
                             NumPad(),
@@ -113,16 +112,18 @@ class _TransitionState extends State<Transition> {
           children: [
             Container(
               child: Text(egp,style:TextStyle(
-                fontSize: 24,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: HexColor("$color"),
+
               )),
             ),
             SizedBox(width: 10,),
             Container(
               child: Text(text,style:TextStyle(
-                fontSize: 24,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
+                color: Colors.white
 
               )),
             ),
@@ -139,7 +140,6 @@ class _TransitionState extends State<Transition> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -154,7 +154,7 @@ class _TransitionState extends State<Transition> {
                       colors();
 
                     });
-                  }, child: Text("1",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("1",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
 
@@ -162,7 +162,6 @@ class _TransitionState extends State<Transition> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -175,14 +174,13 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  }, child: Text("2",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("2",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -197,7 +195,7 @@ class _TransitionState extends State<Transition> {
                       colors();
                     });
 
-                  }, child: Text("3",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("3",style: TextStyle(fontSize: 22,color: Colors.white),),
 
                 ),
               )
@@ -214,7 +212,6 @@ class _TransitionState extends State<Transition> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -227,14 +224,13 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  }, child: Text("4",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("4",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration:BoxDecoration(
-                  color: Colors.black12,
                   borderRadius:BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -247,14 +243,13 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  }, child:Text("5",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child:Text("5",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -268,7 +263,7 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  }, child: Text("6",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("6",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               )
             ],
@@ -284,7 +279,6 @@ class _TransitionState extends State<Transition> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -297,14 +291,13 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  },child: Text("7",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  },child: Text("7",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -317,14 +310,13 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  }, child: Text("8",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("8",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -338,7 +330,7 @@ class _TransitionState extends State<Transition> {
                       }
                       colors();
                     });
-                  }, child: Text("9",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("9",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               )
             ],
@@ -354,7 +346,6 @@ class _TransitionState extends State<Transition> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -372,14 +363,13 @@ class _TransitionState extends State<Transition> {
                     }
                     colors();
 
-                  }, child: Text(".",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                  }, child: Text(".",style: TextStyle(fontSize: 24,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -396,14 +386,13 @@ class _TransitionState extends State<Transition> {
                       });
                     }
                     colors();
-                  }, child: Text("0",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                  }, child: Text("0",style: TextStyle(fontSize: 22,color: Colors.white),),
                 ),
               ),
               Container(
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(60),
                 ),
                 child: FlatButton(
@@ -414,7 +403,7 @@ class _TransitionState extends State<Transition> {
                       colors();
                     });
                   },
-                  child: Icon(Icons.backspace,color: Colors.blue,),
+                  child: Icon(Icons.backspace,color: Colors.white,),
                 ),
               )
             ],
@@ -459,7 +448,7 @@ class _TransitionState extends State<Transition> {
               if (text.isEmpty||(text.startsWith("0.")&& text.length==2)||(text.startsWith("0")&& text.length==1)){
                 return null;
               }else{
-                Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: Sendmoney()));
+                Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: Sendmoney(text1:text,)));
 
               }
 

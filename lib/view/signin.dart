@@ -16,6 +16,7 @@ class SignIn extends StatefulWidget {
   _LogeInState createState() => _LogeInState();
 }
 class _LogeInState extends State<SignIn> {
+  var user;
   bool remember=false;
   bool sec=true;
   var username,password;
@@ -112,6 +113,7 @@ class _LogeInState extends State<SignIn> {
         onSaved: (val){username=val;},
         validator: (val){
           if (val==null||val.isEmpty) {return "Please enter your email";}
+          if(user!="success"){return "Either user or password is wrong";}
           return null;
         },
         cursorColor: HexColor('5b5b5b'),
@@ -144,6 +146,7 @@ class _LogeInState extends State<SignIn> {
         onSaved: (val){password=val;},
         validator: (val){
          if (val==null||val.isEmpty) {return "Please enter your password";}
+         if(user!="success"){return "Either user or password is wrong";}
          return null;
          },
         keyboardType: TextInputType.visiblePassword,
@@ -238,14 +241,17 @@ class _LogeInState extends State<SignIn> {
         color: HexColor("be581a"),
         onPressed: ()async {
           var user= await signin_mvo(username, password, formstate);
-         if(user != null){
+         if(user == "success"){
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder:(context){
                   return app();
                 })
             );
-          }
+          }else{
+           setState(() {
+           });
+         }
         },
         child: Center(
           child: Text("Login",

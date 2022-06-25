@@ -1,9 +1,11 @@
-import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:untitled5/dataclass/datepicker.dart';
 import 'package:untitled5/model_view/signup_mv.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:untitled5/view/signin.dart';
+
 
 import 'app.dart';
 import 'home.dart';
@@ -16,17 +18,22 @@ class signup extends StatefulWidget {
 }
 
 class _signupState extends State<signup> {
-  @override
-  var Verpassword;
 
+  @override
+  var acception;
+  var cheakemail;
+  var Verpassword;
+   String mybirth="";
   TextEditingController Username = TextEditingController();
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
-  TextEditingController birthdate = TextEditingController();
   TextEditingController Password = TextEditingController();
+
 
   GlobalKey<FormState> formstate1 = new GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +43,7 @@ class _signupState extends State<signup> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: HexColor('444444')),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.push(context,PageTransition(type: PageTransitionType.leftToRight, child: SignIn() )),
         ),
       ),
       body: SingleChildScrollView(
@@ -172,9 +179,10 @@ class _signupState extends State<signup> {
         keyboardType: TextInputType.emailAddress,
         onChanged: (Username){
           setState(() {});},
-        validator: (Username){
-          if (Username==null||Username.isEmpty) {return "Please enter email";}
-          if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[gmail-yahoo]+\.[com]").hasMatch(Username)){return "Please enter valid email";}
+        validator: (val){
+          if (val==null||val.isEmpty) {return "Please enter email";}
+          else if(acception=="Email is used") {return"Email is already used";}
+          if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[gmail-yahoo]+\.[com]").hasMatch(val)){return "Please enter valid email";}
           return null;
         },
         cursorColor: HexColor('5b5b5b'),
@@ -210,6 +218,7 @@ class _signupState extends State<signup> {
           setState(() {});},
         validator: (val){
           if (val==null||val.isEmpty) {return "Please enter password";}
+
           return null;
         },
         obscureText:true ,
@@ -274,7 +283,9 @@ class _signupState extends State<signup> {
         ),
         color: HexColor('eeeeee'),
         onPressed: () async{
-         await openDatePicker(context);
+         var  birthdate=await openDatePicker(context);
+         print(birthdate);
+
         },
         child: Center(
           child: Text("Set your birth",
@@ -300,14 +311,18 @@ class _signupState extends State<signup> {
        color: HexColor('be581a'),
        onPressed: () async{
 
-         var acception = await add_data(firstname, lastname,Username,Password,formstate1);
-          if (acception!=null){
+          acception = await add_data(firstname, lastname,Username,mybirth,Password,formstate1);
+          if (acception=="success"){
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder:(context){
                   return app();
                 })
             );
+          }else{
+            setState(() {
+
+            });
           }
        },
         child: Text("Create account",

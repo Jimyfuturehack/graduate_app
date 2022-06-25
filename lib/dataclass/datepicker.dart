@@ -3,8 +3,10 @@ import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
- openDatePicker(BuildContext context) async{
+
+ /**openDatePicker(BuildContext context) {
 
   BottomPicker.date(
       height: 250,
@@ -16,11 +18,30 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
       ),
 
       onSubmit: (index) async{
-        var birth = await  index;
-        return  birth;
+        String birth = await  index.toString();
       },
+      minDateTime: DateTime(1970, 5, 1),
+      maxDateTime: DateTime(2021, 8, 2),
       bottomPickerTheme: BOTTOM_PICKER_THEME.temptingAzure,
       iconColor:  Colors.black,
+
   ).show(context);
 
-}
+}**/
+
+ openDatePicker(BuildContext context) {
+    String? birthdate;
+    DatePicker.showDatePicker(context,
+        showTitleActions: true,
+        minTime: DateTime(1970, DateTime.september, 5, 12),
+        maxTime: DateTime.now(),
+        onConfirm: (date) async {
+        birthdate = await date.toString();
+
+        },
+
+        currentTime: DateTime.now(),
+        locale: LocaleType.en);
+    return birthdate;
+  }
+

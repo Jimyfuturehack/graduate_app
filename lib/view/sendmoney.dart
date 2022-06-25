@@ -3,27 +3,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
-import 'package:url_launcher/url_launcher.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:untitled5/model/notificationApi.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:untitled5/view/confirmationpage.dart';
 class Sendmoney extends StatefulWidget {
-  const Sendmoney({Key? key}) : super(key: key);
 
+   Sendmoney({Key? key,required this.text1}) : super(key: key);
+   final String text1;
   @override
   State<Sendmoney> createState() => _SendmoneyState();
 }
 
 class _SendmoneyState extends State<Sendmoney> {
+ late String amount=widget.text1;
+  Uint8List? myimage;
+  bool isVisible=true;
+ late String mynumber;
   List<Contact> contacts=[];
   List<Contact> filtercontacts=[];
   var height;
-  TextEditingController myname = TextEditingController();
+  TextEditingController to = TextEditingController();
+  TextEditingController description = TextEditingController();
+  var totext;
+  late FocusNode myFocusNode;
   @override
   void initState(){
     super.initState();
+
+
     getAllContacts();
-    myname.addListener(() {
+    to.addListener(() {
       fliterContact();
     });
+    myFocusNode = FocusNode();
+    tz.initializeTimeZones();
+    var initializationSettingsAndroid = AndroidInitializationSettings('mipmap/ic_launcher');
+
+  }
+  void dispose() {
+    myFocusNode.dispose();
+
+    super.dispose();
   }
   getAllContacts() async{
     if(await FlutterContacts.requestPermission()){
@@ -35,9 +57,9 @@ class _SendmoneyState extends State<Sendmoney> {
   fliterContact(){
     List<Contact> _contacts=[];
     _contacts.addAll(contacts);
-    if(myname.text.isNotEmpty){
+    if(to.text.isNotEmpty){
       _contacts.retainWhere((contact){
-        String searchTearm= myname.text.toLowerCase();
+        String searchTearm= to.text.toLowerCase();
         String contactName=contact.displayName.toLowerCase();
         return contactName.contains(searchTearm);
 
@@ -49,10 +71,17 @@ class _SendmoneyState extends State<Sendmoney> {
   }
 
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height-277;
-    bool isSearch= myname.text.isNotEmpty;
+    height = MediaQuery.of(context).size.height-350;
+    bool isSearch= to.text.isNotEmpty;
     return Scaffold(
       appBar: AppBar(
+        title: Text("EGP ${amount}"),
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          color: Colors.black,
+            fontWeight: FontWeight.bold
+        ),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -72,7 +101,7 @@ class _SendmoneyState extends State<Sendmoney> {
             children: [
               Column(
                 children:<Widget> [
-                  SizedBox(height: 5,),
+                 SizedBox(height: 5,),
                   Container(
                     decoration: BoxDecoration(
                       border:  Border(bottom: BorderSide(color:Colors.black26))
@@ -86,8 +115,16 @@ class _SendmoneyState extends State<Sendmoney> {
                             width: MediaQuery.of(context).size.width / 2,
                           height: 50,
                           child: TextFormField(
-                          //  autofocus: true,
-                           controller: myname,
+                            autofocus: true,
+                            controller: to,
+                            textInputAction: TextInputAction.next,
+                            validator: (value){
+                              if (value!.isEmpty){
+                                setState(() {
+                                  isVisible=true;
+                                });
+                              }
+                            },
                             cursorHeight: 25,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
@@ -114,7 +151,9 @@ class _SendmoneyState extends State<Sendmoney> {
                           width: MediaQuery.of(context).size.width / 2,
                           height: 50,
                           child: TextFormField(
+                            focusNode: myFocusNode,
                             cursorHeight: 25,
+                            controller: description,
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
@@ -139,32 +178,76 @@ class _SendmoneyState extends State<Sendmoney> {
                       ),
                     ),
                   ),
-                  Container(
+                  if (isVisible||to.text.length==0) Container(
                     width: double.infinity,
                     height: height,
                     child: ListView.builder(
                         itemCount: isSearch==true? filtercontacts.length : contacts.length,
                         itemBuilder: ( context,index){
                           var contact = isSearch==true? filtercontacts![index]: contacts![index];
-                          Uint8List? image= contact.photo;
-                          String number=(contact.phones.isNotEmpty)? contact.phones.first.number: " ";
+                          Uint8List?  image= contact.photo;
+                         String number=(contact.phones.isNotEmpty)? contact.phones.first.number: " ";
                           return Card(
                             child: ListTile(
-                              onTap: () {
-                                myname.text = contact.displayName;
 
-                              },
                               title: Text(contact.displayName),
                               subtitle: Text(number),
-                              leading: (image==null)?Initicon(text: contact.displayName,):CircleAvatar(backgroundImage: MemoryImage(image),),
+                              leading: (image==null)?Initicon(text: contact.displayName,):CircleAvatar(backgroundImage: MemoryImage(image!),),
+                              onTap: () {
+                                to.text = contact.displayName;
+                                myFocusNode.requestFocus();
+                                isVisible=false;
+                                totext=to.text;
+                                myimage=image;
+                                mynumber=number;
+                                setState(() {
 
+                                });
+                              },
 
                             ),
                           );
 
 
                         }
-                    ),)
+                    ),
+                  ) else if(MediaQuery.of(context).viewInsets.bottom==0) Container(
+                    height: height+50,
+                    width: 250,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        color: Colors.blueAccent,
+                        child: FlatButton(
+                          onPressed: (){
+                            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Confirm(name: totext, photo: myimage,number: mynumber,amount: amount,)));
+
+                          },
+                          child: Text("Send",style: TextStyle(color: Colors.white,fontSize: 18,),),
+                        ),
+                      ),
+                    ),
+                  )else if(MediaQuery.of(context).viewInsets.bottom!=0) Container(
+                    height: height-200,
+                    width: 250,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 50,
+                        width: 300,
+                        color: Colors.blueAccent,
+                        child: FlatButton(
+                          onPressed: (){
+
+
+                          },
+                          child: Text("Send",style: TextStyle(color: Colors.white,fontSize: 18,),),
+                        ),
+                      ),
+                    ),
+                  )
 
                 ],
               ),
@@ -175,6 +258,7 @@ class _SendmoneyState extends State<Sendmoney> {
         ),
       ),
     );
+
   }
 }
 
