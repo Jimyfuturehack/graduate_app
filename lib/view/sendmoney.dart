@@ -182,14 +182,13 @@ class _SendmoneyState extends State<Sendmoney> {
                     width: double.infinity,
                     height: height,
                     child: ListView.builder(
-                        itemCount: isSearch==true? filtercontacts.length : contacts.length,
+                        itemCount: isSearch==true? filtercontacts!.length : contacts!.length,
                         itemBuilder: ( context,index){
                           var contact = isSearch==true? filtercontacts![index]: contacts![index];
                           Uint8List?  image= contact.photo;
                          String number=(contact.phones.isNotEmpty)? contact.phones.first.number: " ";
                           return Card(
                             child: ListTile(
-
                               title: Text(contact.displayName),
                               subtitle: Text(number),
                               leading: (image==null)?Initicon(text: contact.displayName,):CircleAvatar(backgroundImage: MemoryImage(image!),),

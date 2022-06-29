@@ -1,7 +1,7 @@
+import 'package:bottom_picker/widgets/date_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
-import 'package:untitled5/dataclass/datepicker.dart';
 import 'package:untitled5/model_view/signup_mv.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:untitled5/view/signin.dart';
@@ -23,12 +23,13 @@ class _signupState extends State<signup> {
   var acception;
   var cheakemail;
   var Verpassword;
-   String mybirth="";
+   DateTime? mybirth;
   TextEditingController Username = TextEditingController();
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController Password = TextEditingController();
-
+  TextEditingController number = TextEditingController();
+  TextEditingController varify = TextEditingController();
 
   GlobalKey<FormState> formstate1 = new GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
@@ -38,7 +39,6 @@ class _signupState extends State<signup> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
@@ -58,14 +58,16 @@ class _signupState extends State<signup> {
                 child: Transform.translate(
                   offset: Offset(0,-70),
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 30),
+                    padding: const EdgeInsets.only(right: 10),
                     child: Form(
                       key: formstate1,
                       child: Column(
                         children:<Widget> [
-                          Image(image: AssetImage("images/EasyMoneyLogo.jpg"),height: 250,),
+                          Image(image: AssetImage("images/EasyMoneyLogo.jpg"),height: 200,),
 
                           name(),
+                          SizedBox(height: 20,),
+                          Number(),
                           SizedBox(height: 20,),
                           username(),
                           SizedBox(height: 20,),
@@ -203,6 +205,41 @@ class _signupState extends State<signup> {
       ),
     );
   }
+  Widget Number(){
+    return Container(
+      height: 40,
+      width: 340,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.black12,
+      ),
+      child: TextFormField(
+        controller: number,
+        onChanged: (number){
+          setState(() {});},
+        keyboardType: TextInputType.number,
+        validator: (number){
+          if (number==null||number.isEmpty) {return "Please enter your number";}
+          return null;
+        },
+        cursorColor: HexColor('5b5b5b'),
+        cursorHeight: 20,
+        style: TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+          errorStyle: TextStyle(
+            height: 0,
+            color: Colors.red[400],
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
+          contentPadding: EdgeInsets.only(left: 10.0),
+          hintText: 'Phone number',
+          hintStyle: TextStyle(color: Colors.black38),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
   Widget password(){
     return Container(
       height: 40,
@@ -241,6 +278,7 @@ class _signupState extends State<signup> {
       ),
     );
   }
+
     Widget verpassowrd(){
       return Container(
         height: 40,
@@ -251,8 +289,10 @@ class _signupState extends State<signup> {
         ),
         child: TextFormField(
           keyboardType: TextInputType.visiblePassword,
-          validator: (val){
-            if (val==null  || val.isEmpty){return "Please vareify password ";}
+          controller: varify,
+          onChanged: (varify){setState((){});},
+          validator: (varify){
+             if (varify==null  || varify.isEmpty){return "Please vareify password ";}
             return null;
           },
           obscureText:true ,
@@ -267,7 +307,7 @@ class _signupState extends State<signup> {
               fontSize: 13,
             ),
             contentPadding: EdgeInsets.only(left: 10.0),
-            hintText: 'Password',
+            hintText: 'Veriify password',
             hintStyle: TextStyle(color: Colors.black38),
             border: InputBorder.none,
           ),
@@ -276,28 +316,19 @@ class _signupState extends State<signup> {
     }
     Widget datepaicker(){
     return Container(
-      width: 150,
-      child: TextButton(
-        style: TextButton.styleFrom(
-        shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(5)
-        ),
-        primary: HexColor('eeeeee'),
-        ),
-        onPressed: () async{
-        var  birthdate=await openDatePicker(context);
-
-
+      width: 250,
+    height: 100,
+     child: CupertinoDatePicker(
+        mode: CupertinoDatePickerMode.date,
+        initialDateTime: DateTime(1990, 1, 1),
+        minimumYear: 1950,
+        maximumDate: DateTime.now(),
+        onDateTimeChanged: (DateTime newDateTime) {
+          mybirth=newDateTime;
         },
-        child: Center(
-          child: Text("Set your birth",
-            style: TextStyle(
-              color: HexColor('5b5b5b'),
-              fontSize: 18,
-            ),
-          ),
-        ),
+
       ),
+
     );
     }
     Widget submit(){
@@ -315,19 +346,13 @@ class _signupState extends State<signup> {
           backgroundColor: Colors.blue,
         ),
        onPressed: () async{
-
-          acception = await add_data(firstname, lastname,Username,mybirth,Password,formstate1);
-          if (acception=="success"){
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder:(context){
-                  return app();
-                })
-            );
-          }else{
-            setState(() {
-
-            });
+          String mynumber=number.text;
+          acception = await add_data(firstname, lastname,Username,mynumber,mybirth,Password,formstate1);
+          if(acception!=null) {
+            Navigator.pushReplacement(context,
+                PageTransition(
+                    type: PageTransitionType.bottomToTop,
+                    child: app()));
           }
        },
         child: Text("Create account",
@@ -340,5 +365,17 @@ class _signupState extends State<signup> {
         ),
     );
     }
-
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime selectedDate = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
 }

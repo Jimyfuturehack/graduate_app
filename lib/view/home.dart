@@ -1,33 +1,58 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled5/view/signin.dart';
+import '../model/Transactionhistory.dart';
 import 'data_transections.dart';
 import 'package:untitled5/model_view/datatransaction.dart';
+var username = FirebaseAuth.instance.currentUser?.email;
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
+var myamount;
 
 class _HomeState extends State<Home> {
 
+  List historyTrans=[];
   List<Color> colors=[Colors.grey,Colors.grey,Colors.grey];
   List<String> names=["StarBucks","Amazon","Nike","Carrefour","Kentucky","Jumia","name7","name8"];
   var height;
   List<String> amount=["\$3.99","\$20.32","\$120.28","\$250.95","\$15.62","\$4.82","\$40","\$40"];
   ScrollController _scrollController = ScrollController();
   int _maxitem=5;
+
   @override
   void initState(){
       super.initState();
-
+      getData();
+      getAmount();
       _scrollController.addListener(() {
         if (_scrollController.position.pixels ==_scrollController.position.maxScrollExtent){
           _getMoreItems();
         }
     });
+  }
+  getAmount()async{
+
+    var docSnapshot = await userRef.doc(username).collection("Data").doc("Info").get();
+    Map<String, dynamic> data = docSnapshot.data()!;
+    myamount=data['Balance'];
+    print(myamount);
+  }
+  getData()async{
+    List data= await Transactionhistory().getUsersList();
+    if(data==null){
+      print("no data");
+
+    }else{
+      setState((){ historyTrans = data;});
+
+    }
   }
   _getMoreItems(){
     print("Get more");
@@ -123,7 +148,7 @@ class _HomeState extends State<Home> {
                       Text("Main account",
                             style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
                           ),
-                    Text("\$500",
+                    Text("\$ ${myamount.toString()}",
                     style: TextStyle(
                     fontSize: 18,
                     ),
@@ -143,12 +168,11 @@ class _HomeState extends State<Home> {
 
         child: ListView.builder(
             itemExtent: 80,
-           controller: _scrollController,
-            itemCount: names.length+1,
+         //  controller: _scrollController,
+
+            itemCount: historyTrans.length,
             itemBuilder: (context,index){
-            if (index==names.length){
-              return CupertinoActivityIndicator();
-            }
+
               return Container(
                height: 60,
                 child: Column(
@@ -163,10 +187,10 @@ class _HomeState extends State<Home> {
                                   ),
                               );
                         },
-                        title: Text(names[index],style: TextStyle(fontWeight: FontWeight.bold),),
+                        title: Text("${historyTrans[index]["Transferedto"]}",style: TextStyle(fontWeight: FontWeight.bold),),
                         leading: FlutterLogo(),
-                        subtitle: Text(names[index]),
-                        trailing: Text(amount[index],style: TextStyle(fontSize: 16),),
+                       subtitle: Text("${historyTrans[index]["TransactionAmmount"]}"),
+                      //  trailing: Text("${historyTrans[index]["TransactionDate"]}",style: TextStyle(fontSize: 16),),
                       ),
                     ),
                   ],
@@ -178,5 +202,6 @@ class _HomeState extends State<Home> {
       );
 
     }
+
 }
 
