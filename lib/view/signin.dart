@@ -113,7 +113,7 @@ class _LogeInState extends State<SignIn> {
         onSaved: (val){username=val;},
         validator: (val){
           if (val==null||val.isEmpty) {return "Please enter your email";}
-          if(user!="success"){return "Either user or password is wrong";}
+         // if(user!="success"){return "Either user or password is wrong";}
           return null;
         },
         cursorColor: HexColor('5b5b5b'),
@@ -146,7 +146,7 @@ class _LogeInState extends State<SignIn> {
         onSaved: (val){password=val;},
         validator: (val){
          if (val==null||val.isEmpty) {return "Please enter your password";}
-         if(user!="success"){return "Either user or password is wrong";}
+      //   if(user!="success"){return "Either user or password is wrong";}
          return null;
          },
         keyboardType: TextInputType.visiblePassword,
@@ -234,11 +234,12 @@ class _LogeInState extends State<SignIn> {
       height: 50,
       width: 280,
       alignment: Alignment.centerRight,
-      child: FlatButton(
+      child: ElevatedButton(
+        style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)
         ),
-        color: HexColor("be581a"),
+        backgroundColor: HexColor("be581a"),),
         onPressed: ()async {
           var user= await signin_mvo(username, password, formstate);
          if(user == "success"){
@@ -270,12 +271,12 @@ class _LogeInState extends State<SignIn> {
       height: 50,
       width: 280,
       alignment: Alignment.centerRight,
-      child: FlatButton(
-
+      child: ElevatedButton(
+        style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)
         ),
-        color: Colors.black26,
+        backgroundColor: Colors.black26,),
         onPressed: ()async {
           Navigator.push(
               context,
@@ -301,7 +302,7 @@ class _LogeInState extends State<SignIn> {
       color: Colors.black12,
       width: 70,
       height: 40,
-      child: FlatButton(onPressed: (){
+      child: TextButton(onPressed: (){
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder:(context){

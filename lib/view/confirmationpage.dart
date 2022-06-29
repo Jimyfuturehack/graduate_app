@@ -2,6 +2,11 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:untitled5/view/requestmoney.dart';
+
+import '../model_view/datatransaction.dart';
+import 'app.dart';
 
 class Confirm extends StatefulWidget {
   const Confirm({Key? key,required this.name,required this.photo,required this.number,required this.amount}) : super(key: key);
@@ -69,7 +74,17 @@ class _ConfirmState extends State<Confirm> {
                           ),
                       )
                   ),
-                onPressed: (){},
+                onPressed: () async{
+                    var confirmed = await dataTransaction(widget.name,widget.amount,widget.photo!);
+                  if(confirmed!=null) {
+                    Navigator.pushReplacement(context,
+                        PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            child: app()));
+                  }else{
+
+                  }
+                },
                 child: Text("Confirm",style: TextStyle(color: Colors.white,letterSpacing: 1,fontSize: 16),),
               ),
             )

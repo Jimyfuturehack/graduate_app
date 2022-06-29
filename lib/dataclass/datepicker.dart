@@ -2,7 +2,6 @@ import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 
@@ -37,7 +36,6 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
         maxTime: DateTime.now(),
         onConfirm: (date) async {
         birthdate = await date.toString();
-
         },
 
         currentTime: DateTime.now(),

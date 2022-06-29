@@ -37,8 +37,9 @@ class profile extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-                child: FlatButton(
-                    color: Colors.white,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,),
                     onLongPress: ()=>{
                       ColoredBox(color: Colors.white,)
                     },

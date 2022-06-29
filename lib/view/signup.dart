@@ -277,14 +277,16 @@ class _signupState extends State<signup> {
     Widget datepaicker(){
     return Container(
       width: 150,
-      child: FlatButton(
+      child: TextButton(
+        style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5)
+           borderRadius: BorderRadius.circular(5)
         ),
-        color: HexColor('eeeeee'),
+        primary: HexColor('eeeeee'),
+        ),
         onPressed: () async{
-         var  birthdate=await openDatePicker(context);
-         print(birthdate);
+        var  birthdate=await openDatePicker(context);
+
 
         },
         child: Center(
@@ -303,12 +305,15 @@ class _signupState extends State<signup> {
       height: 40,
       width: 180,
 
-      child: RaisedButton(
-       elevation: 4,
-       shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(5)
-       ),
-       color: HexColor('be581a'),
+      child: ElevatedButton(
+        style: TextButton.styleFrom(
+          elevation: 4,
+
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5)
+          ),
+          backgroundColor: Colors.blue,
+        ),
        onPressed: () async{
 
           acception = await add_data(firstname, lastname,Username,mybirth,Password,formstate1);

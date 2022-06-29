@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled5/view/signin.dart';
 import 'data_transections.dart';
-import 'package:untitled5/view/profile/main_page.dart';
+import 'package:untitled5/model_view/datatransaction.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -22,7 +22,8 @@ class _HomeState extends State<Home> {
   @override
   void initState(){
       super.initState();
-    _scrollController.addListener(() {
+
+      _scrollController.addListener(() {
         if (_scrollController.position.pixels ==_scrollController.position.maxScrollExtent){
           _getMoreItems();
         }
@@ -46,7 +47,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-        /**  new IconButton(onPressed: ()async{
+         new IconButton(onPressed: ()async{
             await FirebaseAuth.instance.signOut();
             Navigator.pushReplacement(
                 context,
@@ -55,8 +56,8 @@ class _HomeState extends State<Home> {
                 })
             );
 
-          }, icon: Icon(Icons.logout,color: Colors.black,))**/
-          IconButton(onPressed: (){
+          }, icon: Icon(Icons.logout,color: Colors.black,)),
+       /**   IconButton(onPressed: (){
 
             Navigator.push(
                 context,
@@ -65,7 +66,7 @@ class _HomeState extends State<Home> {
                 })
             );
 
-          }, icon: Icon(Icons.person,color: Colors.black,))
+          }, icon: Icon(Icons.person,color: Colors.black,))**/
         ],
         automaticallyImplyLeading: false,
 
@@ -122,7 +123,7 @@ class _HomeState extends State<Home> {
                       Text("Main account",
                             style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
                           ),
-                    Text("\$544",
+                    Text("\$500",
                     style: TextStyle(
                     fontSize: 18,
                     ),

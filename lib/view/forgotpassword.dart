@@ -32,7 +32,7 @@ class _forgotpassState extends State<forgotpass> {
                   ),
                 ),
                 child: Transform.translate(
-                  offset: Offset(0, -30),
+                 offset:  Offset(0, -30),
                   child: Padding(
                     padding: const EdgeInsets.only(right: 30),
                     child: Column(

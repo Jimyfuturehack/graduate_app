@@ -100,11 +100,13 @@ class _onBoardingState extends State<onBoarding> {
                   child: SizedBox(
                     width: 150,
                     height: 50,
-                    child: RaisedButton(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: HexColor('073763'),
                       elevation: 10,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)
-                      ),
+                      ),),
                       onPressed: (){
                         Navigator.push(
                             context,
@@ -114,7 +116,7 @@ class _onBoardingState extends State<onBoarding> {
                             })
                         );
                       },
-                      color: HexColor('073763'),
+
                       child: Text(
                         "Get Started",
                         style: TextStyle(fontSize: 18,letterSpacing: 2,color: Colors.white),

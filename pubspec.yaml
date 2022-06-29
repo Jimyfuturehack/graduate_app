@@ -41,7 +41,7 @@ dependencies:
   bottom_picker: ^1.7.0
   page_view_indicators: ^2.0.0
   flutter_hex_color: ^2.0.0
-  google_sign_in: '^4.0.15'
+  google_sign_in: ^5.3.1
   flutter_facebook_auth: ^4.1.1
   awesome_dialog: ^2.1.2
   cloud_firestore: ^3.1.8
@@ -50,12 +50,14 @@ dependencies:
   numeric_keyboard: ^1.1.0
   contacts_service: ^0.6.0
   url_launcher: ^6.1.2
-  flutter_initicon: ^1.0.3
+  flutter_initicon: ^2.0.0
   flutter_contacts: ^1.1.4
   page_transition: ^2.0.5
   flutter_datetime_picker: ^1.5.1
   flutter_local_notifications: ^9.5.0
   timezone: ^0.8.0
+  uuid: 3.0.6
+
 
 
 
@@ -63,7 +65,7 @@ dependencies:
 
 
 dependency_overrides:
-  firebase_messaging_platform_interface: 3.2.1
+  firebase_messaging_platform_interface: 3.5.2
   firebase_crashlytics_platform_interface: 3.2.1
   cloud_firestore_platform_interface: 5.4.1
   firebase_auth_platform_interface: 6.1.1

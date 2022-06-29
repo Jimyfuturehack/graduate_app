@@ -1,7 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:untitled5/view/home.dart';
 import 'package:untitled5/view/setting.dart';
 import 'package:untitled5/view/transition.dart';
+
+import '../main.dart';
+
+
 class app extends StatefulWidget {
   const app({Key? key}) : super(key: key);
 
@@ -15,8 +21,16 @@ class _HomeState extends State<app> {
     Transition(),
     Setting(),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: taps[currentIndex],
       bottomNavigationBar: BottomNavigationBar(

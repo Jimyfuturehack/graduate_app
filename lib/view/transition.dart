@@ -142,7 +142,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     setState(() {
 
@@ -164,7 +164,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -183,7 +183,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
 
                     setState(() {
@@ -214,7 +214,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -233,7 +233,7 @@ class _TransitionState extends State<Transition> {
                 decoration:BoxDecoration(
                   borderRadius:BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -252,8 +252,8 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
-                  focusColor: Colors.black54,
+                child: TextButton(
+                 // focusColor: Colors.black54,
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -281,7 +281,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -300,7 +300,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -319,8 +319,10 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
-                  focusColor: Colors.black54,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                 //   focusColor: Colors.black54,
+                  ),
                   onPressed: (){
                     setState(() {
                       if(text.length==5){
@@ -348,7 +350,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: ()async{
                    if(text.contains(".")||text.length==4){
                       return null;
@@ -372,7 +374,7 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
+                child: TextButton(
                   onPressed: (){
                     if(text.length==5||(text.contains(".")&&text.length==4)||(text.startsWith("0")&& text.length==1)){
                       return null;
@@ -395,8 +397,8 @@ class _TransitionState extends State<Transition> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                 ),
-                child: FlatButton(
-                  focusColor: Colors.black54,
+                child: TextButton(
+                 // focusNode: Colors.black54,
                   onPressed: (){
                     setState(() {
                       text = text.substring(0,text.length-1);
@@ -423,7 +425,7 @@ class _TransitionState extends State<Transition> {
               color: HexColor("be581a"),
             borderRadius: BorderRadius.circular(30)
           ),
-          child: FlatButton(
+          child: TextButton(
             onPressed: (){
               if (text.isEmpty||(text.startsWith("0.")&& text.length==2)||(text.startsWith("0")&& text.length==1)){
                 return null;
@@ -443,7 +445,7 @@ class _TransitionState extends State<Transition> {
               color: Colors.black26,
               borderRadius: BorderRadius.circular(30)
           ),
-          child: FlatButton(
+          child: TextButton(
             onPressed: (){
               if (text.isEmpty||(text.startsWith("0.")&& text.length==2)||(text.startsWith("0")&& text.length==1)){
                 return null;

@@ -220,7 +220,7 @@ class _SendmoneyState extends State<Sendmoney> {
                         height: 50,
                         width: 300,
                         color: Colors.blueAccent,
-                        child: FlatButton(
+                        child: TextButton(
                           onPressed: (){
                             Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Confirm(name: totext, photo: myimage,number: mynumber,amount: amount,)));
 
@@ -238,10 +238,8 @@ class _SendmoneyState extends State<Sendmoney> {
                         height: 50,
                         width: 300,
                         color: Colors.blueAccent,
-                        child: FlatButton(
+                        child: TextButton(
                           onPressed: (){
-
-
                           },
                           child: Text("Send",style: TextStyle(color: Colors.white,fontSize: 18,),),
                         ),
